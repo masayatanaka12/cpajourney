@@ -1,0 +1,1257 @@
+// ==========================================================================
+// Variables - 紺色基調のカラーパレット
+// ==========================================================================
+$navy-dark: #0d1b2a;
+$navy: #1b263b;
+$navy-light: #415a77;
+$navy-lighter: #778da9;
+$accent-color: #e0a84a;
+$accent-hover: #c9923d;
+$text-color: #333;
+$text-light: #666;
+$text-on-dark: #e0e1dd;
+$background-color: #f8f9fa;
+$white: #fff;
+$border-color: #e1e1e1;
+$card-shadow: 0 4px 12px rgba(13, 27, 42, 0.1);
+$card-shadow-hover: 0 8px 24px rgba(13, 27, 42, 0.15);
+
+$font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
+  'Hiragino Sans', Meiryo, sans-serif;
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+
+// ==========================================================================
+// Reset & Base
+// ==========================================================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// ==========================================================================
+// Layout
+// ==========================================================================
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 0 2rem;
+  }
+}
+
+// ==========================================================================
+// Header
+// ==========================================================================
+.site-header {
+  background: linear-gradient(135deg, $navy-dark 0%, $navy 100%);
+  padding: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 70px;
+  }
+
+  .site-title {
+    color: $white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $accent-color;
+      text-decoration: none;
+    }
+  }
+}
+
+.main-navigation {
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+
+    @media (min-width: $breakpoint-md) {
+      gap: 1rem;
+    }
+  }
+
+  a {
+    display: block;
+    color: $text-on-dark;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: $white;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// ==========================================================================
+// Hero Section (トップページ)
+// ==========================================================================
+.hero-section {
+  background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
+  color: $white;
+  padding: 4rem 0;
+  text-align: center;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 6rem 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 3rem;
+    }
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: $text-on-dark;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+// ==========================================================================
+// Main Content
+// ==========================================================================
+.site-main {
+  padding: 3rem 0;
+  min-height: 60vh;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 4rem 0;
+  }
+}
+
+// ==========================================================================
+// Section Title
+// ==========================================================================
+.section-title {
+  font-size: 1.75rem;
+  color: $navy;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid $accent-color;
+  display: inline-block;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+}
+
+// ==========================================================================
+// Posts Grid (トップページ・アーカイブ)
+// ==========================================================================
+.posts-grid {
+  display: grid;
+  gap: 2rem;
+
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.post-card {
+  background: $white;
+  border-radius: 12px;
+  box-shadow: $card-shadow;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $card-shadow-hover;
+  }
+
+  &__thumbnail {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: linear-gradient(135deg, $navy-light 0%, $navy 100%);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.08);
+    }
+  }
+
+  &__content {
+    padding: 1.5rem;
+  }
+
+  &__meta {
+    color: $navy-lighter;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background-color: $accent-color;
+      border-radius: 50%;
+    }
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+
+    a {
+      color: $navy;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $navy-light;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__excerpt {
+    color: $text-light;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $navy;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: '→';
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: $accent-color;
+      text-decoration: none;
+
+      &::after {
+        transform: translateX(4px);
+      }
+    }
+  }
+}
+
+// サムネイルがない場合のプレースホルダー
+.post-card__thumbnail--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, $navy-light 0%, $navy 100%);
+  color: $white;
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+// ==========================================================================
+// Single Post (個別投稿)
+// ==========================================================================
+.single-post {
+  max-width: 800px;
+  margin: 0 auto;
+  background: $white;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+
+  .post-thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .entry-header {
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid $border-color;
+
+    @media (min-width: $breakpoint-md) {
+      padding: 3rem 3rem 2rem;
+    }
+  }
+
+  .entry-title {
+    font-size: 1.75rem;
+    line-height: 1.4;
+    color: $navy;
+    margin-bottom: 1rem;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 2.25rem;
+    }
+  }
+
+  .entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: $navy-lighter;
+    font-size: 0.9rem;
+
+    a {
+      color: $navy-lighter;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $navy;
+      }
+    }
+
+    .cat-links a {
+      background-color: $navy;
+      color: $white;
+      padding: 0.2rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+
+      &:hover {
+        background-color: $navy-light;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .entry-content {
+    padding: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.9;
+
+    @media (min-width: $breakpoint-md) {
+      padding: 2.5rem 3rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: $navy;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 4px solid $accent-color;
+
+      @media (min-width: $breakpoint-md) {
+        font-size: 1.75rem;
+      }
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: $navy;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+
+      @media (min-width: $breakpoint-md) {
+        font-size: 1.4rem;
+      }
+    }
+
+    h4 {
+      font-size: 1.1rem;
+      color: $navy-light;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    ul,
+    ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    blockquote {
+      border-left: 4px solid $navy;
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+      background-color: rgba($navy, 0.03);
+      border-radius: 0 8px 8px 0;
+
+      p {
+        margin-bottom: 0;
+        color: $navy-light;
+        font-style: italic;
+      }
+    }
+
+    pre {
+      background-color: $navy-dark;
+      color: $text-on-dark;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    code {
+      background-color: rgba($navy, 0.08);
+      color: $navy;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+
+    a {
+      color: $navy;
+      text-decoration: underline;
+      text-decoration-color: $accent-color;
+      text-underline-offset: 3px;
+
+      &:hover {
+        color: $navy-light;
+      }
+    }
+
+    img {
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+  }
+
+  .entry-footer {
+    padding: 1.5rem 2rem 2rem;
+    border-top: 1px solid $border-color;
+
+    @media (min-width: $breakpoint-md) {
+      padding: 2rem 3rem;
+    }
+
+    .tags-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+
+      .tag-label {
+        color: $navy-lighter;
+        margin-right: 0.5rem;
+      }
+
+      a {
+        background-color: $background-color;
+        color: $navy;
+        padding: 0.35rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $navy;
+          color: $white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// Page (固定ページ)
+// ==========================================================================
+.page-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: $white;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  padding: 2rem;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 3rem;
+  }
+
+  .entry-title {
+    font-size: 2rem;
+    color: $navy;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid $accent-color;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .entry-content {
+    font-size: 1.05rem;
+    line-height: 1.9;
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+// ==========================================================================
+// Archive Header
+// ==========================================================================
+.archive-header {
+  background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
+  color: $white;
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+  margin-top: -3rem;
+  text-align: center;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 4rem 0;
+    margin-top: -4rem;
+  }
+
+  .archive-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 2.25rem;
+    }
+  }
+
+  .archive-description {
+    color: $text-on-dark;
+    font-size: 1rem;
+  }
+}
+
+// ==========================================================================
+// Search
+// ==========================================================================
+.search-header {
+  background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
+  color: $white;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  margin-top: -3rem;
+  text-align: center;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 4rem 0;
+    margin-top: -4rem;
+  }
+
+  .search-title {
+    font-size: 1.5rem;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 2rem;
+    }
+
+    span {
+      color: $accent-color;
+    }
+  }
+}
+
+.search-results {
+  .search-result {
+    background: $white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: $card-shadow;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: $card-shadow-hover;
+    }
+
+    .entry-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+
+      a {
+        color: $navy;
+
+        &:hover {
+          color: $navy-light;
+        }
+      }
+    }
+
+    .entry-meta {
+      color: $navy-lighter;
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+
+      .post-type {
+        background-color: $navy;
+        color: $white;
+        padding: 0.15rem 0.6rem;
+        border-radius: 4px;
+        margin-left: 0.5rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    .entry-summary {
+      color: $text-light;
+      line-height: 1.7;
+    }
+  }
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem 0;
+  background: $white;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+
+  p {
+    margin-bottom: 1.5rem;
+    color: $text-light;
+  }
+}
+
+// ==========================================================================
+// 404
+// ==========================================================================
+.error-404 {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $white;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .page-title {
+    font-size: 4rem;
+    color: $navy;
+    margin-bottom: 1rem;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 6rem;
+    }
+  }
+
+  .page-content {
+    box-shadow: none;
+    padding: 0;
+    max-width: 100%;
+
+    p {
+      color: $text-light;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__widgets {
+    display: grid;
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: left;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .widget {
+      background-color: $background-color;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .widget-title {
+      font-size: 1.1rem;
+      color: $navy;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid $accent-color;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        margin-bottom: 0.5rem;
+
+        a {
+          color: $text-color;
+
+          &:hover {
+            color: $navy;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// Search Form
+// ==========================================================================
+.search-form {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: $card-shadow;
+  border-radius: 50px;
+  overflow: hidden;
+
+  .search-field {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    font-size: 1rem;
+    background: $white;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .search-submit {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
+    color: $white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+// ==========================================================================
+// Post Navigation
+// ==========================================================================
+.post-navigation {
+  max-width: 800px;
+  margin: 2rem auto 0;
+
+  .nav-links {
+    display: grid;
+    gap: 1rem;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .nav-previous,
+  .nav-next {
+    a {
+      display: block;
+      padding: 1.25rem 1.5rem;
+      background: $white;
+      border-radius: 12px;
+      box-shadow: $card-shadow;
+      color: $navy;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: $card-shadow-hover;
+        text-decoration: none;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .nav-subtitle {
+    display: block;
+    font-size: 0.8rem;
+    color: $navy-lighter;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-title {
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .nav-next {
+    text-align: right;
+
+    @media (min-width: $breakpoint-md) {
+      grid-column: 2;
+    }
+  }
+}
+
+// ==========================================================================
+// Pagination
+// ==========================================================================
+.pagination,
+.posts-pagination,
+.nav-links {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 0.75rem;
+  background: $white;
+  border-radius: 8px;
+  color: $navy;
+  font-weight: 500;
+  box-shadow: $card-shadow;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $navy;
+    color: $white;
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  &.current {
+    background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
+    color: $white;
+  }
+
+  &.dots {
+    box-shadow: none;
+    background: transparent;
+
+    &:hover {
+      background: transparent;
+      color: $navy;
+      transform: none;
+    }
+  }
+}
+
+// ==========================================================================
+// Sidebar
+// ==========================================================================
+.sidebar {
+  .widget {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: $white;
+    border-radius: 12px;
+    box-shadow: $card-shadow;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .widget-title {
+    font-size: 1.1rem;
+    color: $navy;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid $accent-color;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid $border-color;
+
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      a {
+        color: $text-color;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $navy;
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// Footer
+// ==========================================================================
+.site-footer {
+  background: linear-gradient(135deg, $navy-dark 0%, $navy 100%);
+  color: $text-on-dark;
+  padding: 4rem 0 2rem;
+  margin-top: 4rem;
+
+  .footer-navigation {
+    margin-bottom: 2rem;
+
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    a {
+      color: $navy-lighter;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .site-info {
+    text-align: center;
+    color: $navy-lighter;
+    font-size: 0.9rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ==========================================================================
+// Links
+// ==========================================================================
+a {
+  color: $navy;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $navy-light;
+    text-decoration: underline;
+  }
+}
+
+// ==========================================================================
+// Buttons
+// ==========================================================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &--primary {
+    background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
+    color: $white;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
+  &--accent {
+    background: linear-gradient(135deg, $accent-color 0%, $accent-hover 100%);
+    color: $navy-dark;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    border: 2px solid $navy;
+    color: $navy;
+
+    &:hover {
+      background: $navy;
+      color: $white;
+      text-decoration: none;
+    }
+  }
+}
+
+// ==========================================================================
+// Comments
+// ==========================================================================
+.comments-area {
+  max-width: 800px;
+  margin: 2rem auto 0;
+  background: $white;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  padding: 2rem;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 2.5rem 3rem;
+  }
+
+  .comments-title {
+    font-size: 1.5rem;
+    color: $navy;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $accent-color;
+  }
+
+  .comment-list {
+    list-style: none;
+
+    .comment {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid $border-color;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .comment-author {
+      font-weight: 600;
+      color: $navy;
+      margin-bottom: 0.5rem;
+
+      img {
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .comment-meta {
+      font-size: 0.85rem;
+      color: $navy-lighter;
+      margin-bottom: 0.75rem;
+    }
+
+    .comment-content {
+      color: $text-color;
+      line-height: 1.7;
+    }
+  }
+}
+
+.comment-respond {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid $border-color;
+
+  .comment-reply-title {
+    font-size: 1.25rem;
+    color: $navy;
+    margin-bottom: 1.5rem;
+  }
+
+  .comment-form {
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: $navy;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='url'],
+    textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid $border-color;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $navy;
+      }
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      .submit {
+        padding: 0.875rem 2.5rem;
+        background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
+        color: $white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+
+        &:hover {
+          opacity: 0.9;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// WordPress Core Styles
+// ==========================================================================
+.wp-block-image {
+  margin-bottom: 1.5rem;
+
+  img {
+    border-radius: 8px;
+  }
+
+  figcaption {
+    text-align: center;
+    color: $text-light;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alignleft {
+  float: left;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.alignright {
+  float: right;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+// ==========================================================================
+// Utility Classes
+// ==========================================================================
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.mt-3 {
+  margin-top: 3rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 2rem;
+}
+.mb-3 {
+  margin-bottom: 3rem;
+}

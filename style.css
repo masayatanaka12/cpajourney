@@ -1,0 +1,17 @@
+/*
+Theme Name: CPA Journey
+Theme URI: 
+Author: 
+Author URI: 
+Description: A custom WordPress theme for CPA Journey blog
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cpajpurney
+*/
+
+/* このファイルはWordPressのテーマ認識用です。
+   実際のスタイルはViteでビルドされたファイルを使用します。 */
