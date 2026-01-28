@@ -123,6 +123,20 @@ function cpajpurney_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'cpajpurney_enqueue_assets');
 
 /**
+ * Lucideアイコンの読み込み
+ */
+function cpajpurney_enqueue_lucide() {
+    wp_enqueue_script(
+        'lucide-icons',
+        'https://unpkg.com/lucide@latest',
+        array(),
+        null,
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'cpajpurney_enqueue_lucide');
+
+/**
  * スクリプトタグに type="module" を追加
  */
 function cpajpurney_add_module_type($tag, $handle, $src) {

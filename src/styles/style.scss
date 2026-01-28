@@ -1,49 +1,86 @@
-// ==========================================================================
-// Variables - 紺色基調のカラーパレット
-// ==========================================================================
-$navy-dark: #0d1b2a;
-$navy: #1b263b;
-$navy-light: #415a77;
-$navy-lighter: #778da9;
-$accent-color: #e0a84a;
-$accent-hover: #c9923d;
-$text-color: #333;
-$text-light: #666;
-$text-on-dark: #e0e1dd;
-$background-color: #f8f9fa;
-$white: #fff;
-$border-color: #e1e1e1;
-$card-shadow: 0 4px 12px rgba(13, 27, 42, 0.1);
-$card-shadow-hover: 0 8px 24px rgba(13, 27, 42, 0.15);
+// ==========================================
+// Variables
+// ==========================================
 
-$font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
-  'Hiragino Sans', Meiryo, sans-serif;
+// Colors
+$color-navy-50:  #f0f4f8;
+$color-navy-100: #d9e2ec;
+$color-navy-700: #1a365d; // Main Brand Color
+$color-navy-800: #152c4e;
+$color-navy-900: #10223d;
 
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
+$color-gold-400: #d69e2e;
 
-// ==========================================================================
-// Reset & Base
-// ==========================================================================
-*,
-*::before,
-*::after {
+$color-text-main: #334155; // Slate 700
+$color-text-light: #64748b; // Slate 500
+$color-bg-body:   #fcfcfc;
+$color-white:     #ffffff;
+$color-gray-200:  #e2e8f0;
+$color-gray-400:  #94a3b8;
+$color-gray-600:  #4b5563;
+
+// Fonts
+$font-family-base: "Zen Kaku Gothic New", sans-serif;
+
+// Spacing / Layout
+$max-width: 1152px; // approx 72rem
+$header-height: 64px;
+
+// Breakpoints
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+
+// Shadows
+$shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+
+// ==========================================
+// Mixins & Reset
+// ==========================================
+
+@mixin mq-sm {
+  @media (min-width: $bp-sm) {
+    @content;
+  }
+}
+
+@mixin mq-md {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+
+@mixin mq-lg {
+  @media (min-width: $bp-lg) {
+    @content;
+  }
+}
+
+* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
-  font-size: 16px;
-  line-height: 1.7;
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: $font-family;
-  color: $text-color;
-  background-color: $background-color;
+  margin: 0;
+  font-family: $font-family-base;
+  background-color: $color-bg-body;
+  color: $color-text-main;
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
 }
 
 img {
@@ -52,738 +89,1168 @@ img {
   display: block;
 }
 
-// ==========================================================================
-// Layout
-// ==========================================================================
+// ==========================================
+// Components
+// ==========================================
+
+// Container Utility
+.section__container,
+.site-header__inner,
+.site-footer__inner,
 .container {
-  max-width: 1200px;
+  max-width: $max-width;
   margin: 0 auto;
-  padding: 0 1rem;
-
-  @media (min-width: $breakpoint-md) {
-    padding: 0 2rem;
-  }
+  padding: 0 1.5rem;
 }
 
-// ==========================================================================
-// Header
-// ==========================================================================
-.site-header {
-  background: linear-gradient(135deg, $navy-dark 0%, $navy 100%);
-  padding: 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 70px;
-  }
-
-  .site-title {
-    color: $white;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: $accent-color;
-      text-decoration: none;
-    }
-  }
-}
-
-.main-navigation {
-  ul {
-    list-style: none;
-    display: flex;
-    gap: 0.5rem;
-
-    @media (min-width: $breakpoint-md) {
-      gap: 1rem;
-    }
-  }
-
-  a {
-    display: block;
-    color: $text-on-dark;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      color: $white;
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  }
-}
-
-// ==========================================================================
-// Hero Section (トップページ)
-// ==========================================================================
-.hero-section {
-  background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
-  color: $white;
-  padding: 4rem 0;
-  text-align: center;
-
-  @media (min-width: $breakpoint-md) {
-    padding: 6rem 0;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: 3rem;
-    }
-  }
-
-  p {
-    font-size: 1.1rem;
-    color: $text-on-dark;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-}
-
-// ==========================================================================
-// Main Content
-// ==========================================================================
-.site-main {
-  padding: 3rem 0;
-  min-height: 60vh;
-
-  @media (min-width: $breakpoint-md) {
-    padding: 4rem 0;
-  }
-}
-
-// ==========================================================================
-// Section Title
-// ==========================================================================
-.section-title {
-  font-size: 1.75rem;
-  color: $navy;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 3px solid $accent-color;
-  display: inline-block;
-
-  @media (min-width: $breakpoint-md) {
-    font-size: 2rem;
-  }
-}
-
-// ==========================================================================
-// Posts Grid (トップページ・アーカイブ)
-// ==========================================================================
-.posts-grid {
-  display: grid;
-  gap: 2rem;
-
-  @media (min-width: $breakpoint-md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: $breakpoint-lg) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.post-card {
-  background: $white;
-  border-radius: 12px;
-  box-shadow: $card-shadow;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: $card-shadow-hover;
-  }
-
-  &__thumbnail {
-    display: block;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    background: linear-gradient(135deg, $navy-light 0%, $navy 100%);
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    &:hover img {
-      transform: scale(1.08);
-    }
-  }
-
-  &__content {
-    padding: 1.5rem;
-  }
-
-  &__meta {
-    color: $navy-lighter;
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 4px;
-      height: 4px;
-      background-color: $accent-color;
-      border-radius: 50%;
-    }
-  }
-
-  &__title {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    margin-bottom: 0.75rem;
-
-    a {
-      color: $navy;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: $navy-light;
-        text-decoration: none;
-      }
-    }
-  }
-
-  &__excerpt {
-    color: $text-light;
-    font-size: 0.95rem;
-    margin-bottom: 1.25rem;
-    line-height: 1.7;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  &__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: $navy;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
-
-    &::after {
-      content: '→';
-      transition: transform 0.3s ease;
-    }
-
-    &:hover {
-      color: $accent-color;
-      text-decoration: none;
-
-      &::after {
-        transform: translateX(4px);
-      }
-    }
-  }
-}
-
-// サムネイルがない場合のプレースホルダー
-.post-card__thumbnail--placeholder {
+// Logo
+.logo {
   display: flex;
   align-items: center;
-  justify-content: center;
-  aspect-ratio: 16 / 10;
-  background: linear-gradient(135deg, $navy-light 0%, $navy 100%);
-  color: $white;
-  font-size: 3rem;
-  opacity: 0.5;
+  gap: 0.5rem;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    background-color: $color-navy-700;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-white;
+    
+    i {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &__text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-navy-700;
+    letter-spacing: 0.025em;
+  }
+
+  // Footer Variant
+  &--footer {
+    justify-content: center;
+    margin-bottom: 0.5rem;
+
+    .logo__text {
+      font-size: 1.125rem;
+      color: $color-white;
+    }
+    
+    i {
+      color: $color-text-light;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    @include mq-md {
+      justify-content: flex-start;
+    }
+  }
 }
 
-// ==========================================================================
-// Single Post (個別投稿)
-// ==========================================================================
-.single-post {
-  max-width: 800px;
-  margin: 0 auto;
-  background: $white;
-  border-radius: 16px;
-  box-shadow: $card-shadow;
+// Buttons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  
+  &--outline {
+    border: 1px solid $color-navy-700;
+    color: $color-navy-700;
+    background: transparent;
+    
+    &:hover {
+      background-color: $color-navy-700;
+      color: $color-white;
+      text-decoration: none;
+    }
+  }
+  
+  &--primary {
+    background-color: $color-navy-700;
+    color: $color-white;
+    
+    &:hover {
+      background-color: $color-navy-800;
+      text-decoration: none;
+    }
+  }
+}
 
-  .post-thumbnail {
+// Links
+.link-arrow {
+  color: $color-navy-700;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  i {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.link-more {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $color-navy-700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  
+  i {
+    width: 0.75rem;
+    height: 0.75rem;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover {
+    text-decoration: none;
+    
+    i {
+      transform: translateX(4px);
+    }
+  }
+}
+
+// Tags
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: $color-navy-50;
+  color: $color-navy-700;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 500;
+  border: 1px solid $color-navy-100;
+}
+
+// ==========================================
+// Layout Sections
+// ==========================================
+
+// 1. Header
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-height;
+  background-color: rgba($color-white, 0.95);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid $color-navy-50;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+
+  &__inner {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .entry-header {
-    padding: 2rem 2rem 1.5rem;
-    border-bottom: 1px solid $border-color;
-
-    @media (min-width: $breakpoint-md) {
-      padding: 3rem 3rem 2rem;
-    }
-  }
-
-  .entry-title {
-    font-size: 1.75rem;
-    line-height: 1.4;
-    color: $navy;
-    margin-bottom: 1rem;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: 2.25rem;
-    }
-  }
-
-  .entry-meta {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
     gap: 1rem;
-    color: $navy-lighter;
-    font-size: 0.9rem;
-
-    a {
-      color: $navy-lighter;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: $navy;
-      }
-    }
-
-    .cat-links a {
-      background-color: $navy;
-      color: $white;
-      padding: 0.2rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-
-      &:hover {
-        background-color: $navy-light;
-        text-decoration: none;
-      }
-    }
   }
 
-  .entry-content {
-    padding: 2rem;
-    font-size: 1.05rem;
-    line-height: 1.9;
+  &__tagline {
+    display: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $color-text-light;
+    border-left: 1px solid $color-gray-200;
+    padding-left: 1rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
 
-    @media (min-width: $breakpoint-md) {
-      padding: 2.5rem 3rem;
+    @include mq-md {
+      display: inline-block;
     }
-
-    h2 {
-      font-size: 1.5rem;
-      color: $navy;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      padding-left: 1rem;
-      border-left: 4px solid $accent-color;
-
-      @media (min-width: $breakpoint-md) {
-        font-size: 1.75rem;
-      }
-    }
-
-    h3 {
-      font-size: 1.25rem;
-      color: $navy;
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-
-      @media (min-width: $breakpoint-md) {
-        font-size: 1.4rem;
-      }
-    }
-
-    h4 {
-      font-size: 1.1rem;
-      color: $navy-light;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      margin-bottom: 1.5rem;
-    }
-
-    ul,
-    ol {
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
-
-      li {
-        margin-bottom: 0.5rem;
-      }
-    }
-
-    blockquote {
-      border-left: 4px solid $navy;
-      padding: 1rem 1.5rem;
-      margin: 2rem 0;
-      background-color: rgba($navy, 0.03);
-      border-radius: 0 8px 8px 0;
-
-      p {
-        margin-bottom: 0;
-        color: $navy-light;
-        font-style: italic;
-      }
-    }
-
-    pre {
-      background-color: $navy-dark;
-      color: $text-on-dark;
-      padding: 1.5rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-    }
-
-    code {
-      background-color: rgba($navy, 0.08);
-      color: $navy;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.9em;
-    }
-
-    pre code {
-      background: none;
-      color: inherit;
+  }
+  
+  &__nav {
+    .header-menu {
+      list-style: none;
+      margin: 0;
       padding: 0;
-    }
-
-    a {
-      color: $navy;
-      text-decoration: underline;
-      text-decoration-color: $accent-color;
-      text-underline-offset: 3px;
-
-      &:hover {
-        color: $navy-light;
-      }
-    }
-
-    img {
-      border-radius: 8px;
-      margin: 1.5rem 0;
-    }
-  }
-
-  .entry-footer {
-    padding: 1.5rem 2rem 2rem;
-    border-top: 1px solid $border-color;
-
-    @media (min-width: $breakpoint-md) {
-      padding: 2rem 3rem;
-    }
-
-    .tags-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-
-      .tag-label {
-        color: $navy-lighter;
-        margin-right: 0.5rem;
-      }
-
+      gap: 1rem;
+      
       a {
-        background-color: $background-color;
-        color: $navy;
-        padding: 0.35rem 1rem;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        transition: all 0.3s ease;
-
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $color-navy-700;
+        
         &:hover {
-          background-color: $navy;
-          color: $white;
-          text-decoration: none;
+          color: $color-navy-800;
         }
       }
     }
   }
 }
 
-// ==========================================================================
-// Page (固定ページ)
-// ==========================================================================
-.page-content {
-  max-width: 800px;
-  margin: 0 auto;
-  background: $white;
-  border-radius: 16px;
-  box-shadow: $card-shadow;
-  padding: 2rem;
+// WordPress Admin Bar Fix
+.admin-bar .site-header {
+  top: 32px;
+  
+  @media screen and (max-width: 782px) {
+    top: 46px;
+  }
+}
 
-  @media (min-width: $breakpoint-md) {
-    padding: 3rem;
+// 2. Main Content
+.site-main {
+  flex: 1;
+}
+
+// 3. Latest Articles Section
+.section--latest {
+  padding-top: calc(#{$header-height} + 4rem);
+  padding-bottom: 5rem;
+}
+
+.section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.section__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $color-navy-800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+
+  @include mq-md {
+    font-size: 1.5rem;
   }
 
-  .entry-title {
-    font-size: 2rem;
-    color: $navy;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 3px solid $accent-color;
+  i {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: $color-navy-700;
+  }
+}
 
-    @media (min-width: $breakpoint-md) {
-      font-size: 2.5rem;
+.articles-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @include mq-md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mq-lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Article Card
+.article-card {
+  background-color: $color-white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  border: 1px solid $color-navy-50;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+
+  &__thumb {
+    height: 11rem;
+    background-color: $color-gray-200;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
-  .entry-content {
-    font-size: 1.05rem;
-    line-height: 1.9;
+  &__icon-wrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-navy-50;
+    color: $color-navy-700;
+    
+    i {
+      width: 2.5rem;
+      height: 2.5rem;
+      opacity: 0.2;
+    }
+  }
 
-    p {
-      margin-bottom: 1.5rem;
+  &__category {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background-color: $color-navy-700;
+    color: $color-white;
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+
+    &--gray {
+      background-color: $color-gray-600;
+    }
+  }
+
+  &__content {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__date {
+    display: block;
+    font-size: 0.75rem;
+    color: $color-gray-400;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: $color-navy-900;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.4;
+  }
+
+  &__excerpt {
+    font-size: 0.75rem;
+    color: $color-text-light;
+    margin: 0 0 1rem 0;
+    flex: 1;
+    line-height: 1.6;
+    
+    // Line clamp (3 lines)
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid $color-navy-50;
+  }
+}
+
+// 4. Profile Section
+.section--profile {
+  background-color: $color-navy-50;
+  padding: 4rem 1.5rem;
+}
+
+.profile-box {
+  max-width: 56rem;
+  margin: 0 auto;
+  background-color: $color-white;
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid $color-navy-100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: $shadow-sm;
+
+  @include mq-md {
+    padding: 2.5rem;
+    flex-direction: row;
+  }
+
+  &__avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__avatar {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background-color: $color-navy-700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid $color-white;
+    box-shadow: $shadow-md;
+
+    i {
+      width: 3.5rem;
+      height: 3.5rem;
+      color: rgba($color-white, 0.8);
+    }
+
+    @include mq-md {
+      width: 9rem;
+      height: 9rem;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: $color-gold-400;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid $color-white;
+
+    i {
+      width: 0.75rem;
+      height: 0.75rem;
+      color: $color-white;
+    }
+  }
+
+  &__content {
+    text-align: center;
+    
+    @include mq-md {
+      text-align: left;
+    }
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-navy-800;
+    margin: 0 0 0.5rem 0;
+  }
+
+  &__name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: $color-navy-700;
+    margin: 0 0 0.75rem 0;
+  }
+
+  &__desc {
+    font-size: 0.875rem;
+    color: $color-gray-600;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.7;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+
+    @include mq-md {
+      justify-content: flex-start;
     }
   }
 }
 
-// ==========================================================================
-// Archive Header
-// ==========================================================================
-.archive-header {
-  background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
-  color: $white;
-  padding: 3rem 0;
-  margin-bottom: 3rem;
-  margin-top: -3rem;
-  text-align: center;
+// 5. Footer
+.site-footer {
+  background-color: $color-navy-900;
+  color: $color-white;
+  padding: 2.5rem 1.5rem;
+  margin-top: auto;
 
-  @media (min-width: $breakpoint-md) {
-    padding: 4rem 0;
-    margin-top: -4rem;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    @include mq-md {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
-  .archive-title {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+  &__brand {
+    text-align: center;
+    
+    @include mq-md {
+      text-align: left;
+    }
+  }
 
-    @media (min-width: $breakpoint-md) {
+  &__desc {
+    font-size: 0.75rem;
+    color: $color-gray-400;
+    margin: 0;
+  }
+
+  &__social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: $color-navy-800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background-color: $color-navy-700;
+    }
+
+    i {
+      width: 1rem;
+      height: 1rem;
+      color: $color-white;
+    }
+  }
+
+  &__copyright {
+    max-width: $max-width;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid $color-navy-800;
+    text-align: center;
+    color: $color-text-light;
+    font-size: 0.625rem;
+  }
+}
+
+// ==========================================
+// Single Post Page
+// ==========================================
+
+// Breadcrumb
+.breadcrumb {
+  margin: calc(#{$header-height} + 1.5rem) auto 1.5rem;
+  max-width: 800px;
+  padding: 0 1.5rem;
+  
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.75rem;
+    color: $color-text-light;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: '>';
+      margin: 0 0.5rem;
+      color: $color-gray-200;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $color-navy-700;
+    }
+
+    &--current {
+      color: $color-navy-700;
+      font-weight: 500;
+    }
+  }
+}
+
+// Post Layout
+.post-container {
+  max-width: 800px;
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+}
+
+// Post Header
+.post-header {
+  margin-bottom: 3rem;
+  text-align: left;
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__date {
+    font-size: 0.875rem;
+    color: $color-text-light;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    
+    i {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+  
+  &__category {
+    background-color: $color-navy-700;
+    color: $color-white;
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    
+    &:hover {
+      background-color: $color-navy-800;
+      text-decoration: none;
+    }
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $color-navy-900;
+    line-height: 1.4;
+    margin: 0 0 1.5rem 0;
+
+    @include mq-md {
       font-size: 2.25rem;
     }
   }
 
-  .archive-description {
-    color: $text-on-dark;
-    font-size: 1rem;
+  &__thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    background-color: $color-gray-200;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-light;
+    margin-bottom: 2rem;
+    border: 1px solid $color-navy-50;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .thumb-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: $color-navy-50;
+      
+      i {
+        width: 3rem;
+        height: 3rem;
+        color: $color-navy-700;
+        opacity: 0.2;
+      }
+    }
   }
 }
 
-// ==========================================================================
-// Search
-// ==========================================================================
-.search-header {
-  background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
-  color: $white;
-  padding: 3rem 0;
-  margin-bottom: 2rem;
-  margin-top: -3rem;
-  text-align: center;
+// Post Content (Typography Styles)
+.post-content {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: $color-text-main;
 
-  @media (min-width: $breakpoint-md) {
-    padding: 4rem 0;
-    margin-top: -4rem;
+  @include mq-md {
+    font-size: 1.05rem;
   }
 
-  .search-title {
+  // --- Headings ---
+  h2 {
     font-size: 1.5rem;
+    font-weight: 700;
+    color: $color-navy-800;
+    margin: 3rem 0 1.5rem;
+    padding: 0.75rem 1rem;
+    background-color: $color-navy-50;
+    border-left: 5px solid $color-navy-700;
+    line-height: 1.4;
+  }
 
-    @media (min-width: $breakpoint-md) {
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-navy-800;
+    margin: 2.5rem 0 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid $color-navy-100;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem;
+    color: $color-navy-700;
+  }
+
+  // --- Paragraphs ---
+  p {
+    margin-bottom: 1.5rem;
+  }
+  
+  // --- Lists ---
+  // Unordered List (Dots)
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+
+    li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0.6rem;
+        left: 0;
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: $color-navy-700;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  // Ordered List (Numbers)
+  ol {
+    counter-reset: post-counter;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+
+    li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 0.75rem;
+
+      &::before {
+        counter-increment: post-counter;
+        content: counter(post-counter) ".";
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $color-navy-700;
+        font-weight: 700;
+        font-family: $font-family-base;
+      }
+    }
+  }
+
+  // --- Blockquote ---
+  blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    border-left: 4px solid $color-gray-200;
+    color: $color-text-light;
+    font-style: italic;
+    
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // --- Emphasis ---
+  strong {
+    font-weight: 700;
+    color: $color-navy-900;
+  }
+
+  // --- Images inside post ---
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  // --- Code ---
+  pre {
+    background-color: $color-navy-900;
+    color: $color-white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 0 0 1.5rem 0;
+    font-size: 0.875rem;
+  }
+
+  code {
+    background-color: $color-navy-50;
+    color: $color-navy-700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+
+  // --- Links ---
+  a {
+    color: $color-navy-700;
+    text-decoration: underline;
+    text-decoration-color: $color-gold-400;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: $color-navy-800;
+    }
+  }
+  
+  // --- Table ---
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    
+    th, td {
+      border: 1px solid $color-navy-100;
+      padding: 0.75rem 1rem;
+    }
+    
+    th {
+      background-color: $color-navy-50;
+      color: $color-navy-800;
+      font-weight: 700;
+      text-align: left;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  }
+}
+
+// Post Footer (Tags)
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid $color-navy-100;
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+
+    .tag-label {
+      color: $color-text-light;
+      margin-right: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    a {
+      background-color: $color-navy-50;
+      color: $color-navy-700;
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+      border: 1px solid $color-navy-100;
+      text-decoration: none;
+
+      &:hover {
+        background-color: $color-navy-700;
+        color: $color-white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// CTA Box (Post Content Specific)
+.post-cta {
+  margin: 3rem 0;
+  padding: 2rem;
+  background-color: $color-navy-50;
+  border: 1px solid $color-navy-100;
+  border-radius: 0.75rem;
+  text-align: center;
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-navy-800;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Single post page layout
+body.single {
+  .site-main {
+    padding-top: 0;
+    padding-bottom: 4rem;
+  }
+}
+
+// ==========================================
+// Page (固定ページ)
+// ==========================================
+.page-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: $color-white;
+  border-radius: 1rem;
+  box-shadow: $shadow-md;
+  padding: 2rem 1.5rem;
+
+  @include mq-md {
+    padding: 2.5rem;
+  }
+
+  .entry-title {
+    font-size: 1.75rem;
+    color: $color-navy-800;
+    margin: 0 0 2rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid $color-gold-400;
+
+    @include mq-md {
       font-size: 2rem;
+    }
+  }
+
+  .entry-content {
+    font-size: 1rem;
+    line-height: 1.9;
+
+    p {
+      margin: 0 0 1.5rem 0;
+    }
+  }
+}
+
+body.page {
+  .site-main {
+    padding-top: calc(#{$header-height} + 3rem);
+    padding-bottom: 4rem;
+  }
+}
+
+// ==========================================
+// Archive
+// ==========================================
+.archive-header {
+  background-color: $color-navy-700;
+  color: $color-white;
+  padding: 4rem 1.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+
+  .archive-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+
+    @include mq-md {
+      font-size: 2rem;
+    }
+  }
+
+  .archive-description {
+    color: rgba($color-white, 0.8);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+body.archive {
+  .site-main {
+    padding-top: $header-height;
+  }
+  
+  .section__container {
+    padding-bottom: 4rem;
+  }
+}
+
+// ==========================================
+// Search
+// ==========================================
+.search-header {
+  background-color: $color-navy-700;
+  color: $color-white;
+  padding: 4rem 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .search-title {
+    font-size: 1.25rem;
+    margin: 0;
+
+    @include mq-md {
+      font-size: 1.5rem;
     }
 
     span {
-      color: $accent-color;
+      color: $color-gold-400;
     }
   }
 }
 
 .search-results {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  
   .search-result {
-    background: $white;
+    background: $color-white;
     padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: $card-shadow;
+    border-radius: 0.75rem;
+    box-shadow: $shadow-sm;
+    border: 1px solid $color-navy-50;
     margin-bottom: 1.5rem;
     transition: box-shadow 0.3s ease;
 
     &:hover {
-      box-shadow: $card-shadow-hover;
+      box-shadow: $shadow-lg;
     }
 
     .entry-title {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.125rem;
+      margin: 0 0 0.5rem 0;
 
       a {
-        color: $navy;
+        color: $color-navy-800;
 
         &:hover {
-          color: $navy-light;
+          color: $color-navy-700;
         }
       }
     }
 
     .entry-meta {
-      color: $navy-lighter;
-      font-size: 0.85rem;
+      color: $color-text-light;
+      font-size: 0.8rem;
       margin-bottom: 0.75rem;
 
       .post-type {
-        background-color: $navy;
-        color: $white;
-        padding: 0.15rem 0.6rem;
-        border-radius: 4px;
+        background-color: $color-navy-700;
+        color: $color-white;
+        padding: 0.15rem 0.5rem;
+        border-radius: 0.25rem;
         margin-left: 0.5rem;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
       }
     }
 
     .entry-summary {
-      color: $text-light;
+      color: $color-text-light;
+      font-size: 0.875rem;
       line-height: 1.7;
+      margin: 0;
     }
   }
 }
 
 .no-results {
   text-align: center;
-  padding: 3rem 0;
-  background: $white;
-  border-radius: 16px;
-  box-shadow: $card-shadow;
+  padding: 3rem 1.5rem;
+  background: $color-white;
+  border-radius: 1rem;
+  box-shadow: $shadow-md;
 
   p {
-    margin-bottom: 1.5rem;
-    color: $text-light;
+    margin: 0 0 1.5rem 0;
+    color: $color-text-light;
   }
 }
 
-// ==========================================================================
-// 404
-// ==========================================================================
-.error-404 {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: $white;
-  border-radius: 16px;
-  box-shadow: $card-shadow;
-  max-width: 800px;
-  margin: 0 auto;
-
-  .page-title {
-    font-size: 4rem;
-    color: $navy;
-    margin-bottom: 1rem;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: 6rem;
-    }
-  }
-
-  .page-content {
-    box-shadow: none;
-    padding: 0;
-    max-width: 100%;
-
-    p {
-      color: $text-light;
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-    }
-  }
-
-  &__widgets {
-    display: grid;
-    gap: 2rem;
-    margin-top: 3rem;
-    text-align: left;
-
-    @media (min-width: $breakpoint-md) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .widget {
-      background-color: $background-color;
-      padding: 1.5rem;
-      border-radius: 8px;
-    }
-
-    .widget-title {
-      font-size: 1.1rem;
-      color: $navy;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid $accent-color;
-    }
-
-    ul {
-      list-style: none;
-
-      li {
-        margin-bottom: 0.5rem;
-
-        a {
-          color: $text-color;
-
-          &:hover {
-            color: $navy;
-          }
-        }
-      }
-    }
+body.search {
+  .site-main {
+    padding-top: $header-height;
+    padding-bottom: 4rem;
   }
 }
 
-// ==========================================================================
+// ==========================================
 // Search Form
-// ==========================================================================
+// ==========================================
 .search-form {
   display: flex;
-  max-width: 500px;
+  max-width: 400px;
   margin: 0 auto;
-  box-shadow: $card-shadow;
-  border-radius: 50px;
+  box-shadow: $shadow-md;
+  border-radius: 9999px;
   overflow: hidden;
 
   .search-field {
     flex: 1;
-    padding: 1rem 1.5rem;
+    padding: 0.875rem 1.5rem;
     border: none;
-    font-size: 1rem;
-    background: $white;
+    font-size: 0.875rem;
+    font-family: inherit;
+    background: $color-white;
 
     &:focus {
       outline: none;
@@ -791,33 +1258,119 @@ img {
   }
 
   .search-submit {
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
-    color: $white;
+    padding: 0.875rem 1.5rem;
+    background-color: $color-navy-700;
+    color: $color-white;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    transition: opacity 0.3s ease;
+    font-family: inherit;
+    transition: background-color 0.3s ease;
 
     &:hover {
-      opacity: 0.9;
+      background-color: $color-navy-800;
     }
   }
 }
 
-// ==========================================================================
+// ==========================================
+// 404
+// ==========================================
+.error-404 {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $color-white;
+  border-radius: 1rem;
+  box-shadow: $shadow-md;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .page-title {
+    font-size: 4rem;
+    color: $color-navy-700;
+    margin: 0 0 1rem 0;
+  }
+
+  .page-content {
+    box-shadow: none;
+    padding: 0;
+    max-width: 100%;
+    background: transparent;
+    border-radius: 0;
+
+    p {
+      color: $color-text-light;
+      margin: 0 0 2rem 0;
+      font-size: 1rem;
+    }
+  }
+
+  &__widgets {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    text-align: left;
+
+    @include mq-md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .widget {
+      background-color: $color-navy-50;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .widget-title {
+      font-size: 1rem;
+      color: $color-navy-800;
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid $color-gold-400;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-bottom: 0.5rem;
+
+        a {
+          color: $color-text-main;
+          font-size: 0.875rem;
+
+          &:hover {
+            color: $color-navy-700;
+          }
+        }
+      }
+    }
+  }
+}
+
+body.error404 {
+  .site-main {
+    padding-top: calc(#{$header-height} + 3rem);
+    padding-bottom: 4rem;
+  }
+}
+
+// ==========================================
 // Post Navigation
-// ==========================================================================
+// ==========================================
 .post-navigation {
   max-width: 800px;
   margin: 2rem auto 0;
+  padding: 0 1.5rem;
 
   .nav-links {
     display: grid;
     gap: 1rem;
 
-    @media (min-width: $breakpoint-md) {
+    @include mq-md {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -826,15 +1379,16 @@ img {
   .nav-next {
     a {
       display: block;
-      padding: 1.25rem 1.5rem;
-      background: $white;
-      border-radius: 12px;
-      box-shadow: $card-shadow;
-      color: $navy;
+      padding: 1.25rem;
+      background: $color-white;
+      border-radius: 0.75rem;
+      box-shadow: $shadow-sm;
+      border: 1px solid $color-navy-50;
+      color: $color-navy-800;
       transition: all 0.3s ease;
 
       &:hover {
-        box-shadow: $card-shadow-hover;
+        box-shadow: $shadow-lg;
         text-decoration: none;
         transform: translateY(-2px);
       }
@@ -843,8 +1397,8 @@ img {
 
   .nav-subtitle {
     display: block;
-    font-size: 0.8rem;
-    color: $navy-lighter;
+    font-size: 0.75rem;
+    color: $color-text-light;
     margin-bottom: 0.25rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -853,250 +1407,105 @@ img {
   .nav-title {
     font-weight: 600;
     line-height: 1.4;
+    font-size: 0.875rem;
   }
 
   .nav-next {
     text-align: right;
 
-    @media (min-width: $breakpoint-md) {
+    @include mq-md {
       grid-column: 2;
     }
   }
 }
 
-// ==========================================================================
+// ==========================================
 // Pagination
-// ==========================================================================
+// ==========================================
 .pagination,
-.posts-pagination,
-.nav-links {
+.posts-pagination {
   margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
 }
 
 .page-numbers {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  height: 44px;
+  min-width: 40px;
+  height: 40px;
   padding: 0 0.75rem;
-  background: $white;
-  border-radius: 8px;
-  color: $navy;
+  background: $color-white;
+  border-radius: 0.5rem;
+  color: $color-navy-700;
   font-weight: 500;
-  box-shadow: $card-shadow;
+  font-size: 0.875rem;
+  box-shadow: $shadow-sm;
+  border: 1px solid $color-navy-50;
   transition: all 0.3s ease;
 
   &:hover {
-    background: $navy;
-    color: $white;
+    background: $color-navy-700;
+    color: $color-white;
     text-decoration: none;
     transform: translateY(-2px);
   }
 
   &.current {
-    background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
-    color: $white;
+    background: $color-navy-700;
+    color: $color-white;
   }
 
   &.dots {
     box-shadow: none;
     background: transparent;
+    border: none;
 
     &:hover {
       background: transparent;
-      color: $navy;
+      color: $color-navy-700;
       transform: none;
     }
   }
 }
 
-// ==========================================================================
-// Sidebar
-// ==========================================================================
-.sidebar {
-  .widget {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: $white;
-    border-radius: 12px;
-    box-shadow: $card-shadow;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .widget-title {
-    font-size: 1.1rem;
-    color: $navy;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid $accent-color;
-  }
-
-  ul {
-    list-style: none;
-
-    li {
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid $border-color;
-
-      &:last-child {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-      }
-
-      a {
-        color: $text-color;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: $navy;
-        }
-      }
-    }
-  }
-}
-
-// ==========================================================================
-// Footer
-// ==========================================================================
-.site-footer {
-  background: linear-gradient(135deg, $navy-dark 0%, $navy 100%);
-  color: $text-on-dark;
-  padding: 4rem 0 2rem;
-  margin-top: 4rem;
-
-  .footer-navigation {
-    margin-bottom: 2rem;
-
-    ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    a {
-      color: $navy-lighter;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: $white;
-      }
-    }
-  }
-
-  .site-info {
-    text-align: center;
-    color: $navy-lighter;
-    font-size: 0.9rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-}
-
-// ==========================================================================
-// Links
-// ==========================================================================
-a {
-  color: $navy;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $navy-light;
-    text-decoration: underline;
-  }
-}
-
-// ==========================================================================
-// Buttons
-// ==========================================================================
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  &--primary {
-    background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
-    color: $white;
-
-    &:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-      text-decoration: none;
-      color: $white;
-    }
-  }
-
-  &--accent {
-    background: linear-gradient(135deg, $accent-color 0%, $accent-hover 100%);
-    color: $navy-dark;
-
-    &:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-      text-decoration: none;
-    }
-  }
-
-  &--outline {
-    background: transparent;
-    border: 2px solid $navy;
-    color: $navy;
-
-    &:hover {
-      background: $navy;
-      color: $white;
-      text-decoration: none;
-    }
-  }
-}
-
-// ==========================================================================
+// ==========================================
 // Comments
-// ==========================================================================
+// ==========================================
 .comments-area {
   max-width: 800px;
   margin: 2rem auto 0;
-  background: $white;
-  border-radius: 16px;
-  box-shadow: $card-shadow;
-  padding: 2rem;
+  background: $color-white;
+  border-radius: 1rem;
+  box-shadow: $shadow-md;
+  padding: 2rem 1.5rem;
 
-  @media (min-width: $breakpoint-md) {
-    padding: 2.5rem 3rem;
+  @include mq-md {
+    padding: 2.5rem;
   }
 
   .comments-title {
-    font-size: 1.5rem;
-    color: $navy;
-    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: $color-navy-800;
+    margin: 0 0 1.5rem 0;
     padding-bottom: 1rem;
-    border-bottom: 2px solid $accent-color;
+    border-bottom: 2px solid $color-gold-400;
   }
 
   .comment-list {
     list-style: none;
+    margin: 0;
+    padding: 0;
 
     .comment {
       padding: 1.5rem 0;
-      border-bottom: 1px solid $border-color;
+      border-bottom: 1px solid $color-navy-50;
 
       &:last-child {
         border-bottom: none;
@@ -1105,7 +1514,7 @@ a {
 
     .comment-author {
       font-weight: 600;
-      color: $navy;
+      color: $color-navy-800;
       margin-bottom: 0.5rem;
 
       img {
@@ -1117,14 +1526,15 @@ a {
     }
 
     .comment-meta {
-      font-size: 0.85rem;
-      color: $navy-lighter;
+      font-size: 0.8rem;
+      color: $color-text-light;
       margin-bottom: 0.75rem;
     }
 
     .comment-content {
-      color: $text-color;
+      color: $color-text-main;
       line-height: 1.7;
+      font-size: 0.9rem;
     }
   }
 }
@@ -1132,12 +1542,12 @@ a {
 .comment-respond {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid $color-navy-50;
 
   .comment-reply-title {
-    font-size: 1.25rem;
-    color: $navy;
-    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    color: $color-navy-800;
+    margin: 0 0 1.5rem 0;
   }
 
   .comment-form {
@@ -1145,7 +1555,8 @@ a {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: 500;
-      color: $navy;
+      color: $color-navy-700;
+      font-size: 0.875rem;
     }
 
     input[type='text'],
@@ -1153,17 +1564,17 @@ a {
     input[type='url'],
     textarea {
       width: 100%;
-      padding: 0.875rem 1rem;
-      border: 2px solid $border-color;
-      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      border: 1px solid $color-navy-100;
+      border-radius: 0.5rem;
       margin-bottom: 1.25rem;
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 0.9rem;
       transition: border-color 0.3s ease;
 
       &:focus {
         outline: none;
-        border-color: $navy;
+        border-color: $color-navy-700;
       }
     }
 
@@ -1174,18 +1585,19 @@ a {
 
     .form-submit {
       .submit {
-        padding: 0.875rem 2.5rem;
-        background: linear-gradient(135deg, $navy 0%, $navy-light 100%);
-        color: $white;
+        padding: 0.75rem 2rem;
+        background-color: $color-navy-700;
+        color: $color-white;
         border: none;
-        border-radius: 50px;
+        border-radius: 0.5rem;
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 0.875rem;
         font-weight: 600;
+        font-family: inherit;
         transition: all 0.3s ease;
 
         &:hover {
-          opacity: 0.9;
+          background-color: $color-navy-800;
           transform: translateY(-2px);
         }
       }
@@ -1193,20 +1605,74 @@ a {
   }
 }
 
-// ==========================================================================
+// ==========================================
+// Sidebar
+// ==========================================
+.sidebar {
+  .widget {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: $color-white;
+    border-radius: 0.75rem;
+    box-shadow: $shadow-sm;
+    border: 1px solid $color-navy-50;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .widget-title {
+    font-size: 1rem;
+    color: $color-navy-800;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid $color-gold-400;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid $color-navy-50;
+
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      a {
+        color: $color-text-main;
+        font-size: 0.875rem;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $color-navy-700;
+        }
+      }
+    }
+  }
+}
+
+// ==========================================
 // WordPress Core Styles
-// ==========================================================================
+// ==========================================
 .wp-block-image {
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0;
 
   img {
-    border-radius: 8px;
+    border-radius: 0.5rem;
   }
 
   figcaption {
     text-align: center;
-    color: $text-light;
-    font-size: 0.9rem;
+    color: $color-text-light;
+    font-size: 0.8rem;
     margin-top: 0.5rem;
   }
 }
@@ -1229,29 +1695,17 @@ a {
   margin-bottom: 1rem;
 }
 
-// ==========================================================================
+// ==========================================
 // Utility Classes
-// ==========================================================================
+// ==========================================
 .text-center {
   text-align: center;
 }
 
-.mt-1 {
-  margin-top: 1rem;
-}
-.mt-2 {
-  margin-top: 2rem;
-}
-.mt-3 {
-  margin-top: 3rem;
-}
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mt-3 { margin-top: 3rem; }
 
-.mb-1 {
-  margin-bottom: 1rem;
-}
-.mb-2 {
-  margin-bottom: 2rem;
-}
-.mb-3 {
-  margin-bottom: 3rem;
-}
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mb-3 { margin-bottom: 3rem; }

@@ -6,28 +6,50 @@
  */
 ?>
 
-    <footer id="colophon" class="site-footer">
-        <div class="container">
-            <?php if (has_nav_menu('footer')) : ?>
-                <nav class="footer-navigation">
-                    <?php
-                    wp_nav_menu(array(
-                        'theme_location' => 'footer',
-                        'menu_id'        => 'footer-menu',
-                        'depth'          => 1,
-                    ));
-                    ?>
-                </nav>
-            <?php endif; ?>
-            
-            <div class="site-info">
-                <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div class="site-footer__brand">
+                <div class="logo logo--footer">
+                    <i data-lucide="compass"></i>
+                    <span class="logo__text"><?php bloginfo('name'); ?></span>
+                </div>
+                <p class="site-footer__desc"><?php bloginfo('description'); ?></p>
             </div>
+
+            <div class="site-footer__social">
+                <?php 
+                // SNSリンクはカスタマイザーで設定するか、直接編集してください
+                $twitter_url = '';
+                $instagram_url = '';
+                
+                if ($twitter_url) : ?>
+                    <a href="<?php echo esc_url($twitter_url); ?>" class="social-link" target="_blank" rel="noopener">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                <?php endif; ?>
+                
+                <?php if ($instagram_url) : ?>
+                    <a href="<?php echo esc_url($instagram_url); ?>" class="social-link" target="_blank" rel="noopener">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="site-footer__copyright">
+            &copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All Rights Reserved.
         </div>
     </footer>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
+
+<!-- Initialize Lucide Icons -->
+<script>
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
 
 </body>
 </html>
